@@ -32,25 +32,32 @@ nmap <space> za
 nmap <C-t> :NERDTreeToggle<CR>
 
 " Syntax highlight
-let python_highlight_all=1
+" let python_highlight_all=1
 syntax on
 
 " Plugin settings
 let NERDTreeIgnore=['\.pyc$', '\~$']
 
 " Common settings
-set nu
+set number
+set hlsearch
+set incsearch
+set ruler
+set nowrap
+set autoindent
+set smartindent
+set expandtab
+set tw=0
 set clipboard=unnamed
 
 " Filetype-specific settings
-au BufNewFile,BufRead *.py,*.json,*.yaml set
-    \ tabstop=4 
-    \ softtabstop=4 
-    \ shiftwidth=4 
+au BufNewFile,BufRead *.py set
+    \ tabstop=4
+    \ softtabstop=4
+    \ shiftwidth=4
     \ textwidth=99    " PEP8 standard: 79
-    \ expandtab 
-    \ autoindent 
-    \ fileformat=unix 
+    \ nocindent
+    \ fileformat=unix
 
 au BufNewFile,BufRead *.js,*.html,*.css set
     \ tabstop=2
