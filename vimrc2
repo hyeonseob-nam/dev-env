@@ -1,0 +1,84 @@
+" Add plugins (vim-plug)
+call plug#begin('~/.vim/plugged')
+
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
+Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/syntastic'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdcommenter'
+Plug 'majutsushi/tagbar'
+Plug 'kien/ctrlp.vim'
+Plug 'valloric/youcompleteme', { 'do': './install.py --all'}
+Plug 'nanotech/jellybeans.vim'
+
+call plug#end()
+
+" Enable filetype-specific settings
+filetype plugin indent on
+
+" Syntax highlight
+if has("syntax")
+ syntax on
+endif
+
+" Color scheme
+colorscheme jellybeans
+
+" Tab naviation shotcuts
+nmap <C-l> :tabn<CR>
+nmap <C-h> :tabp<CR>
+
+" Editor settings
+set number
+set backspace=indent,eol,start
+set hlsearch
+set incsearch
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set showmatch
+set autoindent
+set smartcase
+set smarttab
+set smartindent
+set ruler
+set fileencodings=utf8,euc-kr
+
+" Plugin settings
+" - airline
+set laststatus=2
+
+" - gitgutter
+set updatetime=200
+let g:gitgutter_sign_added = '+'
+let g:gitgutter_sign_modified = '>'
+let g:gitgutter_sign_removed = '-'
+let g:gitgutter_sign_removed_first_line = '^'
+let g:gitgutter_sign_modified_removed = '<'
+
+" - syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" - nerdtree
+nmap <C-t> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" - nerdcommenter
+map <C-c> <Plug>NERDCommenterToggle
+
+" - tagbar
+nmap <C-\> :TagbarOpenAutoClose<CR>
+
+" - ctrlp
+let g:ctrlp_custom_ignore = {
+\ 'dir':  '\.git$\|public$\|log$\|tmp$\|vendor$\|node_modules$',
+\ 'file': '\v\.(exe|so|dll)$'
+\ }
+
+" - youcompleteme
+let g:ycm_autoclose_preview_window_after_completion = 1
+nmap <C-]> :YcmCompleter GoTo<CR>
