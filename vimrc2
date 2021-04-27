@@ -1,17 +1,18 @@
 " Add plugins (vim-plug)
 call plug#begin('~/.vim/plugged')
 
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
-Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
-Plug 'valloric/youcompleteme', { 'do': './install.py --all'}
-Plug 'nanotech/jellybeans.vim'
+Plug 'morhetz/gruvbox'
+" Plug 'majutsushi/tagbar'
+" Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-fugitive'
+" Plug 'valloric/youcompleteme', { 'do': './install.py --all'}
+" Plug 'nanotech/jellybeans.vim'
 
 call plug#end()
 
@@ -24,7 +25,11 @@ if has("syntax")
 endif
 
 " Color scheme
-colorscheme jellybeans
+let g:gruvbox_contrast_dark="hard"
+set background=dark
+autocmd vimenter * colorscheme gruvbox
+
+"colorscheme jellybeans
 
 " Tab naviation shotcuts
 nmap <C-l> :tabn<CR>
@@ -40,18 +45,21 @@ set softtabstop=4
 set shiftwidth=4
 set showmatch
 set autoindent
-set smartcase
-set smarttab
 set smartindent
+set smarttab
+set expandtab
 set ruler
 set fileencodings=utf8,euc-kr
+set laststatus=2
 
 " Plugin settings
 " - airline
-set laststatus=2
+let g:airline_section_b = ''
+let g:airline_section_x = ''
+let g:airline_section_y = ''
 
 " - gitgutter
-set updatetime=200
+set updatetime=100
 let g:gitgutter_sign_added = '+'
 let g:gitgutter_sign_modified = '>'
 let g:gitgutter_sign_removed = '-'
@@ -69,9 +77,10 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " - nerdcommenter
 map <C-c> <Plug>NERDCommenterToggle
-
-" - tagbar
-nmap <C-\> :TagbarOpenAutoClose<CR>
+let g:NERDSpaceDelims = 1
+let g:NERDAltDelims_java = 1
+let g:NERDCommentEmptyLines = 1
+let g:NERDToggleCheckAllLines = 1
 
 " - ctrlp
 let g:ctrlp_custom_ignore = {
@@ -79,6 +88,9 @@ let g:ctrlp_custom_ignore = {
 \ 'file': '\v\.(exe|so|dll)$'
 \ }
 
+" - tagbar
+" nmap <C-\> :TagbarOpenAutoClose<CR>
+
 " - youcompleteme
-let g:ycm_autoclose_preview_window_after_completion = 1
-nmap <C-]> :YcmCompleter GoTo<CR>
+" let g:ycm_autoclose_preview_window_after_completion = 1
+" nmap <C-]> :YcmCompleter GoTo<CR>
